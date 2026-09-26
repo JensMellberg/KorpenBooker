@@ -20,31 +20,31 @@ Orkar du inte kompilera koden själv är det bara ladda ner .exe'n här
 
 \## Alla kommandon
 
-\# -session <sessionskaka>
+\### -session <sessionskaka>
 
 Sparar ner sessionskakan till korpensidan. Den behövs för bokningsanropet och ska vara din personliga. Du hittar den i \*\*dev-tools\*\* (F12 på chrome), under fliken \*\*Application\*\* och menyalternativet \*\*Cookies\*\*. Kakan heter \*\*session\*\* och dess \*\*Value\*\* ska vara en lång slumpmässig sträng.
 
 
 
-\# -userid <userid>
+\### -userid <userid>
 
 Sparar ner ditt korpen-användarid. Det behövs för bokningsanropet, det kommer sättas automatiskt om du angett en giltig sessionskaka
 
 
 
-\# -list <frånDatum> <tillDatum>
+\### -list <frånDatum> <tillDatum>
 
 Listar alla pass och deras träningsid'n i tidsintervallet, träningsid't behövs för att göra anropet för bokningen.
 
 
 
-\# -book <träningsid>
+\### -book <träningsid>
 
 Lägger in en schemalagd task i windows taskscheduler som kommer utföra bokningsanropet 5 dagar innan passet, är passet redan bokningsbart kommer den boka direkt. <träningsid> för du genom att köra `-list`-kommandot
 
 
 
-\# -exit
+\### -exit
 
 Avslutar applikationen
 

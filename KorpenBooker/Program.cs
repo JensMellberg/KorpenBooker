@@ -124,6 +124,18 @@ namespace KorpenBooker
                         continue;
                     }
 
+                    if (string.IsNullOrEmpty(storage.SessionCookie))
+                    {
+                        Console.WriteLine("Du behöver ange en sessionskaka för att kunna boka ett pass");
+                        continue;
+                    }
+
+                    if (string.IsNullOrEmpty(storage.UserId))
+                    {
+                        Console.WriteLine("Du behöver ange ett userid för att kunna boka ett pass");
+                        continue;
+                    }
+
                     ScheduleBooking(workoutDate, workoutId);
                 }
                 else if (command?.Equals("exit") == true)
