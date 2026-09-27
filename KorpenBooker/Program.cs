@@ -149,11 +149,27 @@ namespace KorpenBooker
             }
         }
 
+        static void WaitUntil(DateTime time)
+        {
+            while (true)
+            {
+                var delay = time - DateTime.Now;
+
+                if (delay > TimeSpan.Zero)
+                {
+                    Thread.Sleep(delay);
+                }
+                else
+                {
+                    return;
+                }
+            }
+        }
+
         static void Book(string workoutId)
         {
             var storage = Storage.GetFromFile();
             var log = new StringBuilder();
-            log.AppendLine($"Försöker boka korpenträning. Tid: {DateTime.Now}");
             if (string.IsNullOrEmpty(storage.SessionCookie))
             {
                 log.AppendLine("Finns ingen sessionskaka, avbryter");
@@ -167,6 +183,11 @@ namespace KorpenBooker
                 WriteLog();
                 return;
             }
+
+            log.AppendLine($"Väntar tills klockan är 7: {DateTime.Now}");
+            var now = DateTime.Now;
+            WaitUntil(new DateTime(now.Year, now.Month, now.Day, 7, 0, 0));
+            log.AppendLine($"Försöker boka korpenträning. Tid: {DateTime.Now}");
 
             PerformBookingWithRetries(() => KorpenService.Book(storage.SessionCookie, long.Parse(workoutId), storage.UserId), log, 1);
             WriteLog();
@@ -257,7 +278,7 @@ namespace KorpenBooker
             var year = date[..4];
             var month = date.Substring(5, 2);
             var day = date.Substring(8, 2);
-            var workoutDate = new DateTime(int.Parse(year), int.Parse(month), int.Parse(day), 7, 0, 0);
+            var workoutDate = new DateTime(int.Parse(year), int.Parse(month), int.Parse(day), 6, 59, 30);
             return workoutDate.AddDays(-5);
         }
     }
